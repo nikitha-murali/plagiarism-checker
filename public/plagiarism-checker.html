@@ -55,9 +55,10 @@ main { max-width: 1140px; margin: 0 auto; padding: 0 24px 80px; }
 .top nav a[href="#docs"]:hover::before, .top nav a[href="#docs"]:focus-visible::before { opacity: 1; transform: translateY(0) scale(1) rotate(8deg); }
 .nav-art { position: absolute; top: -19px; right: 2px; width: 22px; height: 22px; overflow: visible; opacity: 0; pointer-events: none; }
 .nav-result-doc { color: var(--nav-color); }
-.nav-result-doc svg { display: block; width: 22px; height: 22px; fill: none; stroke: currentColor; stroke-width: 1.6; stroke-linecap: round; stroke-linejoin: round; }
-.nav-result-doc .doc-sheet { fill: #fde8eb; }
-.top nav a[href="#results"]:hover .nav-result-doc svg, .top nav a[href="#results"]:focus-visible .nav-result-doc svg { animation: red-document-pop 1.2s cubic-bezier(.35,.05,.4,.95) infinite; }
+.nav-result-doc svg { display: block; width: 22px; height: 22px; fill: none; stroke: currentColor; stroke-width: 1.8; stroke-linecap: round; stroke-linejoin: round; }
+.top nav a[href="#results"]:hover .nav-result-doc .nav-download-arrow, .top nav a[href="#results"]:focus-visible .nav-result-doc .nav-download-arrow { animation: nav-download-drop .8s ease-in-out infinite; }
+.nav-result-doc .nav-download-tray { fill: #fde8eb; }
+@keyframes nav-download-drop { 0%, 100% { transform: translateY(-2px); } 55%, 75% { transform: translateY(2px); } }
 .top nav a[href="#results"]:hover .nav-art, .top nav a[href="#results"]:focus-visible .nav-art,
 .top nav a[href="#groups-sec"]:hover .nav-art, .top nav a[href="#groups-sec"]:focus-visible .nav-art,
 .top nav a[href="#more"]:hover .nav-art, .top nav a[href="#more"]:focus-visible .nav-art { opacity: 1; }
@@ -86,8 +87,8 @@ header { display: grid; grid-template-columns: 1fr 1fr; gap: 48px; align-items: 
   background: var(--p-soft); border: 1px solid var(--p-mid);
   padding: 5px 12px; border-radius: 99px; margin-bottom: 18px;
 }
-h1 { font-size: clamp(2.4rem, 5.6vw, 4rem); line-height: 1.02; letter-spacing: -.045em; font-weight: 800; margin: 0 0 18px; text-wrap: balance; }
-h1 .wave-word { display: inline-block; animation: title-wave 1.4s cubic-bezier(.3,.7,.4,1) both; animation-delay: var(--wave-delay); }
+h1 { font-size: clamp(2.8rem, 6vw, 4.5rem); line-height: 1.02; letter-spacing: -.045em; font-weight: 800; margin: 0 0 18px; text-wrap: balance; }
+h1 .wave-word { display: inline-block; animation: title-wave 3s cubic-bezier(.3,.7,.4,1) both; animation-delay: var(--wave-delay); }
 @keyframes title-wave { 0%,100% { transform: translateY(0); } 30% { transform: translateY(-4px); } 62% { transform: translateY(2px); } }
 h1 em { font-style: normal; color: var(--p); }
 p.sub { color: var(--mute); font-size: 1.08rem; max-width: 520px; margin: 0 0 28px; text-wrap: pretty; }
@@ -113,6 +114,10 @@ p.sub { color: var(--mute); font-size: 1.08rem; max-width: 520px; margin: 0 0 28
 .graph-head .sp { flex: 1; }
 .graph-head .chip-s { color: var(--mute); font-size: .78rem; }
 #heroGraph { display: block; width: 100%; aspect-ratio: 4 / 3; }
+.hero-graph-wrap { position: relative; }
+.hero-warning { display: none; position: absolute; z-index: 1; top: 16%; left: 9%; width: max-content; max-width: min(190px, 42%); padding: 7px 10px; border: 1px solid #f1b4bc; border-radius: 9px; color: #7f1d1d; background: #fff4f5; box-shadow: 0 4px 14px rgba(214,58,78,.14); font-size: .8rem; font-weight: 700; line-height: 1.35; pointer-events: none; animation: caution-flash 1.8s ease-in-out infinite; }
+.hero-warning[hidden] { display: none; }
+.hero-graph-wrap:hover .hero-warning:not([hidden]) { display: block; }
 .graph-foot { padding: 12px 16px; border-top: 1px solid var(--line); color: var(--mute); font-size: .85rem; }
 
 /* sections */
@@ -218,8 +223,12 @@ summary { cursor: pointer; color: var(--p); font-weight: 600; width: fit-content
 .ring > div { min-width: 0; }
 .sim-card { background: #fff; border: 1px solid var(--line); border-radius: 16px; overflow: hidden; }
 .sim-card { position: relative; }
-.sim-warning { position: absolute; z-index: 2; max-width: 230px; padding: 7px 10px; border: 1px solid #f1b4bc; border-radius: 9px; color: #9f2638; background: #fff4f5; box-shadow: 0 4px 14px rgba(214,58,78,.14); font-size: .8rem; font-weight: 700; pointer-events: none; }
+.sim-warning { position: absolute; z-index: 2; max-width: 230px; padding: 7px 10px; border: 1px solid #f1b4bc; border-radius: 9px; color: #7f1d1d; background: #fff4f5; box-shadow: 0 4px 14px rgba(214,58,78,.14); font-size: .8rem; font-weight: 700; pointer-events: none; animation: caution-flash 1.8s ease-in-out infinite; }
 .sim-warning[hidden] { display: none; }
+@keyframes caution-flash {
+  0%, 100% { background: #fff4f5; border-color: #f1b4bc; box-shadow: 0 4px 14px rgba(214,58,78,.14); }
+  50% { background: #ffd4da; border-color: #d84a5c; box-shadow: 0 0 0 4px rgba(214,58,78,.2), 0 5px 18px rgba(214,58,78,.25); }
+}
 #simGraph { display: block; width: 100%; aspect-ratio: 16 / 9; touch-action: none; cursor: ns-resize; }
 
 .pairs-wrap { margin-top: 24px; }
@@ -229,11 +238,15 @@ summary { cursor: pointer; color: var(--p); font-weight: 600; width: fit-content
 .bar { flex: 1; min-width: 120px; height: 8px; border-radius: 99px; background: var(--p-soft); overflow: hidden; }
 .bar i { display: block; width: 0; height: 100%; background: var(--p); border-radius: 99px; }
 .tag { font-size: .82rem; font-weight: 600; min-width: 140px; color: var(--mute); }
-.pair.flag { border-color: #f1b4bc; background: #fffafb; }
+.pair.flag { border-color: #f1b4bc; background: #fffafb; animation: flagged-blink 1.2s ease-in-out infinite; }
 .pair.flag .pct, .pair.flag .tag { color: var(--hot); }
 .pair.flag .bar { background: var(--hot-soft); }
 .pair.flag .bar i { background: var(--hot); }
 .pair-open { flex: none; }
+@keyframes flagged-blink {
+  0%, 100% { background: #fffafb; box-shadow: 0 0 0 0 rgba(214,58,78,0); }
+  50% { background: #fde8eb; box-shadow: 0 0 0 3px rgba(214,58,78,.13); }
+}
 
 .compare-dialog { width: min(1000px, calc(100% - 32px)); max-width: none; max-height: min(850px, calc(100% - 32px)); padding: 24px; border: 1px solid var(--line); border-radius: 20px; color: var(--ink); background: var(--bg); box-shadow: 0 24px 80px rgba(15,31,30,.28); }
 .compare-dialog::backdrop { background: rgba(15,31,30,.48); backdrop-filter: blur(3px); }
@@ -284,9 +297,37 @@ td.l, th.l { text-align: left; }
 .step p { margin: 6px 0; }
 .fm { font-family: var(--mono); background: var(--p-soft); padding: 8px 12px; border-radius: 8px; display: block; margin: 8px 0; overflow-x: auto; white-space: nowrap; }
 .dlrow { display: flex; flex-wrap: wrap; gap: 10px; margin: 8px 0 4px; }
+.dlrow button { display: inline-flex; align-items: center; gap: 9px; }
+.download-icon { display: inline-flex; width: 18px; height: 18px; flex: none; align-items: center; justify-content: center; color: var(--p); }
+.download-icon svg { display: block; width: 18px; height: 18px; fill: none; stroke: currentColor; stroke-width: 1.8; stroke-linecap: round; stroke-linejoin: round; overflow: visible; }
+.download-icon .download-arrow { transform-box: fill-box; transform-origin: center; }
+.dlrow button:hover .download-arrow, .dlrow button:focus-visible .download-arrow { animation: download-bounce .8s ease-in-out infinite; }
+.dlrow button.download-active .download-arrow { animation: download-drop .75s cubic-bezier(.2,.8,.2,1); }
+@keyframes download-bounce { 0%, 100% { transform: translateY(-2px); } 55%, 75% { transform: translateY(2px); } }
+@keyframes download-drop {
+  0% { opacity: 1; transform: translateY(-6px); }
+  55% { opacity: .35; transform: translateY(5px); }
+  100% { opacity: 1; transform: translateY(-4px); }
+}
 .mathcta { display: flex; align-items: center; justify-content: space-between; gap: 18px; flex-wrap: wrap; margin-top: 22px; padding: 20px 22px; border-radius: 16px; background: linear-gradient(90deg, #e6f4f2, #e8eefb); border: 1px solid var(--line); }
 .mathcta b { display: block; font-size: 1.15rem; }
 .mathcta span { display: block; color: var(--mute); font-size: .9rem; max-width: 560px; margin-top: 2px; }
+#mathOpen { position: relative; isolation: isolate; overflow: visible; }
+#mathOpen .math-label { position: relative; z-index: 1; color: #fff; font-size: .95rem; max-width: none; margin: 0; }
+.math-sparks { display: block; position: absolute; inset: -18px -24px; max-width: none; margin: 0; pointer-events: none; }
+.math-sparks span { position: absolute; max-width: none; margin: 0; color: var(--blue); font: 700 .8rem/1 var(--mono); opacity: 0; }
+.math-sparks span:nth-child(1) { top: 0; left: 8px; }
+.math-sparks span:nth-child(2) { top: 1px; right: 10px; }
+.math-sparks span:nth-child(3) { bottom: 0; left: 22px; }
+.math-sparks span:nth-child(4) { right: 0; bottom: 1px; }
+#mathOpen:hover .math-sparks span, #mathOpen:focus-visible .math-sparks span { animation: math-spark .9s cubic-bezier(.2,.8,.2,1) infinite; }
+#mathOpen:hover .math-sparks span:nth-child(2), #mathOpen:focus-visible .math-sparks span:nth-child(2) { animation-delay: .12s; }
+#mathOpen:hover .math-sparks span:nth-child(3), #mathOpen:focus-visible .math-sparks span:nth-child(3) { animation-delay: .24s; }
+#mathOpen:hover .math-sparks span:nth-child(4), #mathOpen:focus-visible .math-sparks span:nth-child(4) { animation-delay: .36s; }
+@keyframes math-spark {
+  0%, 100% { opacity: 0; transform: translateY(4px) rotate(-18deg) scale(.7); }
+  50% { opacity: 1; transform: translateY(-4px) rotate(12deg) scale(1.15); }
+}
 .mathpage { position: fixed; inset: 0; z-index: 100; overflow-y: auto; margin: 0; border-radius: 0; border: 0; padding: 20px 24px 80px; background: var(--bg); backdrop-filter: none; }
 .mathpage[hidden] { display: none; }
 .mathpage > * { max-width: 1000px; margin-left: auto; margin-right: auto; }
@@ -314,13 +355,17 @@ footer { text-align: center; color: var(--mute); font-size: .82rem; padding: 12p
   .top nav a:hover, .top nav a:focus-visible { transform: none; }
   .top nav a[href="#docs"]:hover::before, .top nav a[href="#docs"]:focus-visible::before { transform: none; }
   .top nav a:hover .nav-math-signs span, .top nav a:focus-visible .nav-math-signs span { animation: none !important; }
-  .top nav a[href="#results"]:hover .nav-result-doc svg, .top nav a[href="#results"]:focus-visible .nav-result-doc svg { animation: none; }
+  .top nav a[href="#results"]:hover .nav-result-doc .nav-download-arrow, .top nav a[href="#results"]:focus-visible .nav-result-doc .nav-download-arrow { animation: none; }
   .top nav a:hover .nav-art, .top nav a:focus-visible .nav-art { opacity: 1; }
   .top nav a[href="#groups-sec"]:hover .nav-scribble, .top nav a[href="#groups-sec"]:focus-visible .nav-scribble { transform: translateX(50%) rotate(-5deg); }
   .top nav a[href="#groups-sec"]:hover .nav-scribble path, .top nav a[href="#groups-sec"]:focus-visible .nav-scribble path { stroke-dashoffset: 0; transition: none; }
   .top nav a[href="#more"]:hover .nav-math-signs span, .top nav a[href="#more"]:focus-visible .nav-math-signs span { opacity: 1; transform: none; }
   .facts li:hover svg, .facts li:focus-visible svg { transform: none; }
   .fact-tip { transform: none; }
+  .pair.flag, .download-arrow, .nav-download-arrow, #mathOpen .math-sparks span { animation: none !important; }
+  .sim-warning, .hero-warning { animation: none; }
+  .hero-graph-wrap:hover .hero-warning:not([hidden]) { display: block; }
+  #mathOpen .math-sparks span { display: none; }
 }
 </style>
 </head>
@@ -335,7 +380,7 @@ footer { text-align: center; color: var(--mute); font-size: .82rem; padding: 12p
   </a>
   <nav aria-label="Sections">
     <a href="#docs">Documents</a>
-    <a href="#results">Results<span class="nav-art nav-result-doc" aria-hidden="true"><svg viewBox="0 0 24 24"><path class="doc-sheet" d="M6 2.5h8l4 4v15H6z"/><path d="M14 2.5v4h4M8.5 11h7M8.5 14.5h7M8.5 18h5"/></svg></span></a>
+    <a href="#results">Results<span class="nav-art nav-result-doc" aria-hidden="true"><svg viewBox="0 0 24 24"><path class="nav-download-arrow" d="M12 3v10m-3.5-3.5L12 13l3.5-3.5"/><path class="nav-download-tray" d="M5 13.5v6h14v-6M8 16h8"/></svg></span></a>
     <a href="#groups-sec"><span>Groups</span><svg class="nav-art nav-scribble" viewBox="0 0 72 34" aria-hidden="true"><path d="M6 17C8 6 22 4 37 5c14 1 28 3 29 12 1 8-15 12-30 12C19 29 5 26 6 17Z"/></svg></a>
     <a href="#more" id="navMath">Maths<span class="nav-art nav-math-signs" aria-hidden="true"><span>+</span><span>−</span><span>×</span><span>%</span></span></a>
   </nav>
@@ -362,7 +407,10 @@ footer { text-align: center; color: var(--mute); font-size: .82rem; padding: 12p
       <span class="sp"></span>
       <span class="chip-s" id="heroLegend">angle between two documents</span>
     </div>
-    <canvas id="heroGraph" role="img" aria-label="Graph of similarity equals cosine of the angle between two document vectors"></canvas>
+    <div class="hero-graph-wrap">
+      <canvas id="heroGraph" role="img" aria-label="Graph of similarity equals cosine of the angle between two document vectors"></canvas>
+      <div id="heroWarning" class="hero-warning" role="status" hidden>⚠ Plagiarism detected</div>
+    </div>
     <figcaption class="graph-foot" id="heroCap">Each document is a vector of word counts. The smaller the angle θ between two of them, the closer cos&nbsp;θ gets to 1 — and the more alike they are.</figcaption>
   </figure>
 </header>
@@ -428,7 +476,7 @@ footer { text-align: center; color: var(--mute); font-size: .82rem; padding: 12p
     <span class="chip-s">most → least similar</span>
   </div>
   <canvas id="simGraph" role="img" aria-label="Similarity of every pair, sorted, with a draggable threshold line"></canvas>
-  <div id="simWarning" class="sim-warning" role="status" hidden>⚠ Plagiarism-flagged area</div>
+  <div id="simWarning" class="sim-warning" role="status" hidden>⚠ Plagiarism detected</div>
 </div>
 <div class="pairs-wrap"><div id="pairs"></div></div>
 </section>
@@ -465,8 +513,8 @@ footer { text-align: center; color: var(--mute); font-size: .82rem; padding: 12p
 <h2><span class="n" style="--c:var(--slate)">5</span>Download and explore</h2>
 <p class="why">Save any result as a CSV file, or see exactly how these numbers were calculated.</p>
 <h3 style="margin:8px 0 4px">Download results (CSV)</h3>
-<div class="dlrow"><button id="dlFeat" type="button">Feature matrix</button><button id="dlSim" type="button">Similarity matrix</button><button id="dlPca" type="button">PCA coordinates</button><button id="dlPairs" type="button">Similar pairs</button><button id="dlGroups" type="button">Document groups</button></div>
-<div class="mathcta"><div><b>What’s the math behind it?</b><span>Open a page with every step (matrix, rank, vectors, inner products, PCA, projection, groups) worked out with your own documents.</span></div><button class="go" id="mathOpen" type="button">Show the math →</button></div>
+<div class="dlrow"><button id="dlFeat" type="button">Feature matrix<span class="download-icon" aria-hidden="true"><svg viewBox="0 0 20 20"><path class="download-arrow" d="M10 2v10m-4-4 4 4 4-4"/><path d="M3 12v5h14v-5"/></svg></span></button><button id="dlSim" type="button">Similarity matrix<span class="download-icon" aria-hidden="true"><svg viewBox="0 0 20 20"><path class="download-arrow" d="M10 2v10m-4-4 4 4 4-4"/><path d="M3 12v5h14v-5"/></svg></span></button><button id="dlPca" type="button">PCA coordinates<span class="download-icon" aria-hidden="true"><svg viewBox="0 0 20 20"><path class="download-arrow" d="M10 2v10m-4-4 4 4 4-4"/><path d="M3 12v5h14v-5"/></svg></span></button><button id="dlPairs" type="button">Similar pairs<span class="download-icon" aria-hidden="true"><svg viewBox="0 0 20 20"><path class="download-arrow" d="M10 2v10m-4-4 4 4 4-4"/><path d="M3 12v5h14v-5"/></svg></span></button><button id="dlGroups" type="button">Document groups<span class="download-icon" aria-hidden="true"><svg viewBox="0 0 20 20"><path class="download-arrow" d="M10 2v10m-4-4 4 4 4-4"/><path d="M3 12v5h14v-5"/></svg></span></button></div>
+<div class="mathcta"><div><b>What’s the math behind it?</b><span>Open a page with every step (matrix, rank, vectors, inner products, PCA, projection, groups) worked out with your own documents.</span></div><button class="go" id="mathOpen" type="button"><span class="math-label">Show the math →</span><span class="math-sparks" aria-hidden="true"><span>∑</span><span>√</span><span>×</span><span>%</span></span></button></div>
 </section>
 
 <!-- MATHS PAGE -->
@@ -843,6 +891,7 @@ function renderDynamic(){
   S.pairs=all;S.view={gid,flagged,t,groups};renderMath(k,t,usePca,groups,all);
   $("heroCap").textContent=`${n} documents → ${all.length} pairs plotted on the curve. ${flagged.length} pair${flagged.length===1?"":"s"} sit above the ${pct(t)} plagiarism line (red).`;
   $("heroLegend").textContent="your document pairs";
+  $("heroWarning").hidden=flagged.length===0;
   drawSim();if(RM)drawHero(0);
   if(resultsVisible)animateResultPercentages();
 }
@@ -860,7 +909,7 @@ function animateResultPercentages(){
     bars.forEach(el=>{el.style.width=`${(+el.dataset.resultWidth)*progress}%`;});
   };
   if(RM){setProgress(1);return;}
-  const start=performance.now(),duration=850;
+  const start=performance.now(),duration=2200;
   const tick=now=>{
     const progress=Math.min(1,(now-start)/duration);
     const eased=1-Math.pow(1-progress,3);
@@ -934,6 +983,14 @@ $("dlSim").onclick=()=>S&&dlcsv("similarity_matrix.csv",[["",...S.docs.map(d=>d.
 $("dlPca").onclick=()=>S&&dlcsv("pca_coordinates.csv",[["document",...S.scores[0].map((_,c)=>"PC"+(c+1))],...S.scores.map((r,i)=>[nmOf(i),...r.map(x=>+x.toFixed(6))])]);
 $("dlPairs").onclick=()=>S&&dlcsv("similar_pairs.csv",[["document_1","document_2","similarity_percent","flagged"],...S.pairs.map(([i,j,s])=>[nmOf(i),nmOf(j),+(s*100).toFixed(2),s>=S.view.t?"yes":"no"])]);
 $("dlGroups").onclick=()=>S&&dlcsv("document_groups.csv",[["document","group"],...S.docs.map((d,i)=>[d.name,"G"+(S.view.gid[i]+1)])]);
+$("more").querySelector(".dlrow").addEventListener("click",e=>{
+  const button=e.target.closest("button");
+  if(!button||!S)return;
+  button.classList.remove("download-active");
+  void button.offsetWidth;
+  button.classList.add("download-active");
+  setTimeout(()=>button.classList.remove("download-active"),750);
+});
 
 if("IntersectionObserver" in window){
   const resultsObserver=new IntersectionObserver(entries=>{
